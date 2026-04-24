@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Obfuscator — Main Orchestrator
+// encluarz — Main Orchestrator
 // Chains transforms together and manages the obfuscation
 // pipeline. Includes Luau compatibility preprocessing.
 // ============================================================
@@ -23,7 +23,7 @@
 
   /**
    * Preprocess Luau source into standard Lua compatible code.
-   * - Replaces `continue` with `__MATCHA_CONTINUE__()` (resolved in AST fixup)
+   * - Replaces `continue` with `__ENCLUARZ_CONTINUE__()` (resolved in AST fixup)
    * - Expands compound assignments (+=, -=, *=, /=, %=, ^=, ..=)
    * - Strips Luau `type` declarations
    * Respects string literals and comments (won't modify inside them).
@@ -106,7 +106,7 @@
         var before = i > 0 ? code[i - 1] : ' ';
         var after = i + 8 < len ? code[i + 8] : ' ';
         if (!isAlphaNum_(before) && !isAlphaNum_(after)) {
-          result += '__MATCHA_CONTINUE__()';
+          result += '__ENCLUARZ_CONTINUE__()';
           i += 8;
           continue;
         }
@@ -200,7 +200,7 @@
 
   // ================================================================
   //  AST Fixup for continue
-  //  After parsing, walk the AST to replace __MATCHA_CONTINUE__()
+  //  After parsing, walk the AST to replace __ENCLUARZ_CONTINUE__()
   //  calls with goto/label pairs in the enclosing loop body.
   // ================================================================
 
@@ -211,7 +211,7 @@
            node.expression.type === 'CallExpression' &&
            node.expression.base &&
            node.expression.base.type === 'Identifier' &&
-           node.expression.base.name === '__MATCHA_CONTINUE__';
+           node.expression.base.name === '__ENCLUARZ_CONTINUE__';
   }
 
   function fixupContinueGotos(ast) {
@@ -403,8 +403,8 @@
     }
 
     // Add header comment
-    output = '-- Obfuscated with Matcha Obfuscator\n' +
-             '-- https://github.com/matcha-obfuscator\n' + output;
+    output = '-- Obfuscated with encluarz\n' +
+             '-- t.me/rzprvt\n' + output;
 
     onProgress('Complete!', 100);
 

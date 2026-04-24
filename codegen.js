@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Obfuscator — Lua Code Generator
+// encluarz — Lua Code Generator
 // Converts a luaparse AST back into valid Lua source code.
 // ============================================================
 

@@ -1,4 +1,4 @@
--- Test Lua script for Matcha Obfuscator
+-- Test Lua script for encluarz
 local function greet(name)
     local message = "Hello, " .. name .. "!"
     print(message)
@@ -13,7 +13,7 @@ for i = 1, 10 do
 end
 
 local data = {
-    name = "Matcha",
+    name = "encluarz",
     version = 1,
     active = true
 }

@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Obfuscator — Obfuscation Transforms
+// encluarz — Obfuscation Transforms
 // Implements 5 Luraph-style source-level transforms on a
 // luaparse AST.
 // ============================================================

@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Scripts — Script Library Logic
+// encluarz Scripts — Script Library Logic
 // Renders script cards, handles search, and script viewer modal.
 // ============================================================
 
@@ -16,7 +16,7 @@
     { file: 'draw a line to moving part - starryskidder.lua', size: '5.7 KB' },
     { file: 'full bright - starryskidder.lua', size: '2.4 KB' },
     { file: 'korbloxheadlessvisual - sxeaware.lua', size: '1.8 KB' },
-    { file: 'matchalua - diamondreaper9.lua', size: '15.5 KB' },
+    { file: 'encluarz - diamondreaper9.lua', size: '15.5 KB' },
     { file: 'pizza place dilivery autofarm - whymayko.lua', size: '3.4 KB' },
     { file: 'vd auto fix gens - c7.lua', size: '6.1 KB' }
   ];

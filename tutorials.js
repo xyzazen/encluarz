@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Tutorials — Tutorial Engine
+// encluarz Tutorials — Tutorial Engine
 // Renders tutorial cards, article views with code blocks,
 // table of contents, and syntax highlighting.
 // ============================================================

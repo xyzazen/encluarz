@@ -1,5 +1,5 @@
 // ============================================================
-// Matcha Obfuscator — Application / UI Logic
+// encluarz — Application / UI Logic
 // Handles file upload, code editor input, obfuscation
 // triggering, progress updates, error display, copy output,
 // and file download.
