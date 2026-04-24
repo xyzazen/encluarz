@@ -6,7 +6,6 @@
 // ============================================================
 
 export default async function handler(req, res) {
-  // Hanya terima POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -29,7 +28,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Upload script .lua
+    // Upload script .lua ke GitHub
     await githubPut(
       `scripts/${id}.lua`,
       scriptContent,
@@ -37,7 +36,7 @@ export default async function handler(req, res) {
       { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH }
     );
 
-    // Upload entry database .json
+    // Upload entry database .json ke GitHub
     await githubPut(
       `db/${id}.json`,
       JSON.stringify(dbEntry, null, 2),
@@ -45,9 +44,24 @@ export default async function handler(req, res) {
       { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH }
     );
 
-    const rawUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/scripts/${id}.lua`;
+    // ─── Gunakan domain situs sendiri untuk loadstring ───
+    // Otomatis sesuai domain deploy (Vercel, Netlify, dsb.)
+    const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost';
+    const proto = req.headers['x-forwarded-proto'] || 'https';
+    const siteUrl = `${proto}://${host}`;
 
-    return res.status(200).json({ success: true, id, rawUrl });
+    // URL endpoint proxy script (pakai domain sendiri)
+    const scriptUrl = `${siteUrl}/api/script/${id}`;
+
+    // Juga simpan raw GitHub URL sebagai backup
+    const rawGithubUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/scripts/${id}.lua`;
+
+    return res.status(200).json({
+      success:      true,
+      id,
+      rawUrl:       scriptUrl,        // ← pakai site URL sendiri
+      rawGithubUrl: rawGithubUrl,     // ← GitHub URL sebagai backup
+    });
 
   } catch (err) {
     console.error('[encluarz upload error]', err);
@@ -59,7 +73,6 @@ export default async function handler(req, res) {
 async function githubPut(path, content, message, { GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH }) {
   const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
 
-  // Cek sha kalau file sudah ada (untuk update)
   let sha;
   try {
     const check = await fetch(url, {

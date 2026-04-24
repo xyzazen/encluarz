@@ -146,7 +146,7 @@
       callback(scriptCache[filename]);
       return;
     }
-    fetch('contents/scripts/' + encodeURIComponent(filename))
+    fetch('contens/scripts/' + encodeURIComponent(filename))
       .then(function (res) {
         if (!res.ok) throw new Error('Failed to load script');
         return res.text();

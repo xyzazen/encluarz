@@ -327,15 +327,17 @@
     setTimeout(function () { cmOutput.refresh(); }, 10);
 
     // Reset copy button
-    copyText.textContent = 'Copy Output';
+    copyText.textContent = 'Copy';
     btnCopy.classList.remove('copied');
 
+    // Show results, hide empty state
+    var outputEmpty = document.getElementById('outputEmpty');
+    if (outputEmpty) outputEmpty.style.display = 'none';
     resultsContainer.style.display = 'block';
     // Generate loadstring
     if (window.EncluarzLoadstring) {
       window.EncluarzLoadstring.generate(obfuscatedCode, stats);
     }
-    resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // ---- Copy Output -----
