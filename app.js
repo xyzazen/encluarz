@@ -331,6 +331,10 @@
     btnCopy.classList.remove('copied');
 
     resultsContainer.style.display = 'block';
+    // Generate loadstring
+    if (window.EncluarzLoadstring) {
+      window.EncluarzLoadstring.generate(obfuscatedCode, stats);
+    }
     resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
